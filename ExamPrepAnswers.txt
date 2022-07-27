@@ -1,0 +1,162 @@
+--1
+-- SELECT code
+-- FROM aircrafts
+-- WHERE description LIKE 'A310-300F'
+--31Y
+
+--2
+-- SELECT icao
+-- FROM airlines
+-- WHERE name LIKE 'Aigle Azur'
+-- AAF
+
+--3
+-- SELECT count(*)
+-- FROM aircrafts
+-- 343
+-- SELECT count(*)
+-- FROM airlines
+-- 6048
+-- SELECT count(*)
+-- FROM airports
+-- 8107
+
+--4
+-- SELECT count(*)
+-- FROM airlines
+-- WHERE name ILIKE '%Aero%'
+-- 490
+
+--5
+-- SELECT count(*)
+-- FROM airlines
+-- JOIN countries ON airlines.country_id = countries.id
+-- WHERE countries.name = 'Canada'
+-- 318
+
+--6
+-- SELECT count(*)
+-- FROM airports
+-- JOIN countries ON airports.country_id = countries.id 
+-- WHERE countries.name = 'Brazil'
+-- 213
+
+--7
+-- SELECT count(distinct(name))
+-- FROM airports
+-- WHERE timezone_name LIKE '%Europe/Paris%'
+-- 232
+
+--8
+-- SELECT min(elevation), max(elevation), round(avg(elevation),2) AS "Avg"
+-- FROM airports
+-- min =-1266,max=14472,avg=933.45
+
+--9
+-- SELECT min(elevation),max(elevation),round(avg(elevation),2) AS "Avg"
+-- FROM airports
+-- JOIN countries ON airports.country_id = countries.id 
+-- WHERE countries.name = 'Spain'
+-- min=0,max=3586,Avg=832.52
+
+--10
+-- SELECT min(elevation),max(elevation),round(avg(elevation),2) AS "Avg"
+-- FROM airports
+-- WHERE timezone_name LIKE '%Europe/Paris%'
+-- min=0,max=6588,avg=632.03
+
+--11
+-- SELECT count(*)
+-- FROM routes 
+-- WHERE destination_airport_id IS NULL
+-- 242
+
+--12
+-- SELECT count(*)
+-- FROM airlines
+-- JOIN countries ON airlines.country_id = countries.id
+-- WHERE airlines.active LIKE 'Y' AND countries.name LIKE 'France'
+-- 22
+
+--13
+-- SELECT count(distinct(name))
+-- FROM aircrafts
+-- JOIN route_aircrafts ON aircrafts.id = route_aircrafts.aircraft_id
+-- JOIN routes ON route_aircrafts.route_id = routes.id
+-- WHERE routes.id = 170
+-- 1
+
+--14
+-- SELECT count(distinct(routes.id))
+-- FROM routes
+-- JOIN route_aircrafts ON routes.id = route_aircrafts.route_id
+-- JOIN aircrafts ON route_aircrafts.aircraft_id = aircrafts.id
+-- WHERE aircrafts.code LIKE 'SF3'
+-- 479
+
+
+--15
+-- SELECT code
+-- FROM aircrafts
+-- JOIN route_aircrafts ON aircrafts.id = route_aircrafts.aircraft_id
+-- JOIN routes ON route_aircrafts.route_id = routes.id 
+-- WHERE routes.id = 230
+-- AT7
+
+--16
+-- SELECT count(Distinct(airlines.name))
+-- FROM airlines
+-- JOIN routes ON airlines.id = routes.airline_id
+-- WHERE routes.source_airport_id IN (SELECT id
+-- 								  FROM airports
+-- 								  WHERE city = 'Madrid')
+--68
+
+--17
+-- SELECT iata
+-- FROM airports
+-- JOIN routes ON airports.id = routes.destination_airport_id
+-- WHERE routes.id = 263
+-- ORD
+
+--18
+-- SELECT count(distinct(airlines.name))
+-- FROM airlines
+-- JOIN routes ON airlines.id = routes.airline_id
+-- JOIN route_aircrafts ON routes.id = route_aircrafts.route_id
+-- JOIN aircrafts ON route_aircrafts.aircraft_id = aircrafts.id
+-- WHERE airlines.active LIKE 'Y' AND aircrafts.name LIKE '%Airbus%'
+-- 252
+
+--19
+-- SELECT count(distinct(airports.name))
+-- FROM airports
+-- JOIN routes ON airports.id = routes.source_airport_id 
+-- JOIN route_aircrafts ON routes.id = route_aircrafts.route_id
+-- JOIN aircrafts ON route_aircrafts.aircraft_id = aircrafts.id
+-- WHERE airports.timezone_name ILIKE '%Europe%' AND aircrafts.wake_size IN ('M','L')
+-- 566
+
+--20
+-- SELECT count(*)
+-- FROM routes
+-- JOIN airlines ON routes.airline_id = airlines.id
+-- WHERE airlines.active = 'Y' AND airlines.country_id IN (SELECT id
+-- 													   FROM countries
+-- 													   WHERE countries.name LIKE 'Austria' OR countries.name LIKE 'Canada')
+-- 1994
+
+--21
+-- SELECT count(distinct(airports.name))
+-- FROM airports
+-- JOIN routes ON airports.id = routes.destination_airport_id
+-- JOIN airlines on routes.airline_id = airlines.id
+-- WHERE airlines.name LIKE 'Air Canada'
+-- 194
+
+--22
+-- SELECT count(*)
+-- FROM countries
+-- JOIN airports ON countries.id  = airports.country_id
+-- WHERE airports.id IS NULL
+-- 0
